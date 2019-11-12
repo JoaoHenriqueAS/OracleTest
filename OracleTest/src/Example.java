@@ -4,11 +4,11 @@ public class Example {
 
 	//JDBC driver e database URL
 	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";  
-	static final String DB_URL = "jdbc:oracle:thin:@//10.32.4.51:1521/BDTPPRC";
+	static final String DB_URL = "jdbc:oracle:thin:@//[host]:[port]/DB";
 
 	//Usuario e senha
-	static final String USER = "ELO000500";
-	static final String PASS = "joaoh";
+	static final String USER = "user";
+	static final String PASS = "pass";
 
 	public static void main(String[] args) {
 		Connection conn = null;
@@ -17,25 +17,25 @@ public class Example {
 			//Driver JDBC
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-			//Abrindo conex„o
+			//Abrindo conex√£o
 			System.out.println("Conectando ao banco...");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
-			System.out.println("Conex„o realizada com sucesso!!!");
+			System.out.println("Conex√£o realizada com sucesso!!!");
 
 			//Executar a query
 			System.out.println("Creating statement...\n");
 			stmt = conn.createStatement();
 			String sql;
-			sql = "Select CD_ATZC, CD_BNDR From Clc.Tbclcr_Crsa_Crto_Fsco_Dnmc Where Dt_Locl_Trns = '25/05/19' AND cd_atzc = '615479'";
+			sql = "Select From Clc.Tbclcr_Crsa_Crto_Fsco_Dnmc Where Dt_Locl_Trns = '25/05/19' AND cd_atzc = '88888'";
 			ResultSet rs = stmt.executeQuery(sql);
 
-			//ExtraÁ„o de dados
+			//Extra√ß√£o de dados
 			while(rs.next()){
 
 				String CD_ATZC = rs.getString(1);
 				int CD_BNDR = rs.getInt(2);
 
-				System.out.print("Codigo AutorizaÁ„o: " + CD_ATZC);
+				System.out.print("Codigo Autoriza√ß√£o: " + CD_ATZC);
 				System.out.println(", Bandeira: " + CD_BNDR);
 			}
 			//Limpar dados
@@ -49,7 +49,7 @@ public class Example {
 			//Handle errors for Class.forName
 			e.printStackTrace();
 		}finally{
-			//Fechar conex„o
+			//Fechar conex√£o
 			try{
 				if(stmt!=null)
 					stmt.close();
